@@ -124,14 +124,14 @@ c_1   & c_2 & c_3 & c_4 & \dots & c_K \\
 0 & 1 & 0 & 0 & \dots & 0 \\
 \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \\
 0 & \dots & 0 & 0  & 1 & 0
-\end{bmatrix}^{N-1}
+\end{bmatrix}^{N}
 
 \begin {bmatrix}
-a_K \\
 a_{K-1} \\
-a_{K_2} \\
+a_{K-2} \\
 \vdots \\
-a_1  
+a_1 \\ 
+a_0  
 \end {bmatrix}
 $$
 
@@ -140,6 +140,17 @@ $$
 ---
 
 ### ケーリーハミルトンの定理
+
+緑の線形代数の教科書(線形代数講義と演習 改訂版 小林正典, 寺尾宏明 ) P98 定理17.1を見ると、
+
+>定理17.1 (ケイリーハミルトンの定理)
+>$n$次正方行列$A$の固有多項式$\varphi_A(x)$に$A$を代入したものは零行列に等しい
+
+と書いてあります。つまり、$\varphi_A(A) = 0$。ここで $x^N$を $\varphi_A(x)$ で割ったあまりを　と定義する。つまり、 
+$x^N = q(x) \varphi_A(x) + r(x)$。ただし$\deg(r(x)) < \deg(\varphi_A(x))$ 
+
+すると、$A^N = r(A^N)$となる。 $r(x) = r_0 + r_1 x + \dots + r_{K-1} x^{K-1}$　とおくと、$A^N = r(A^N) = r_0 E + r_1 A + \dots + r_{K-1} A^{K-1}$で、 実際にほしい$a_N$は、
+
 
 ### 実際に必要な部分の計算
 
