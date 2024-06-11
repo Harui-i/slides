@@ -3,7 +3,7 @@ marp: true
 math: mathjax
 ---
 
-## 線形漸化式を持つ数列の遷移を表す行列の固有多項式
+## 線形漸化式を持つ数列の遷移を表す行列
 
 $$a_{n+K}= c_1 a_{n+K-1} + c_2 a_{n+k-2} + \dots + c_{K-1} a_{n+1} + c_K a_n$$
 という$K$項間線形漸化式があるとする。
@@ -76,19 +76,23 @@ $$
 
 ## もっと速くできます！！！！
 
+### ケーリーハミルトンの定理
+
+### 実際に不要な部分の計算
 
 ---
 ### 行列の$A$の固有多項式を求める
 $$
-\begin{bmatrix}
+\begin{vmatrix}
 c_1 - x  & -c_2 & -c_3 & -c_4 & \dots & -c_K \\
 -1 & x & 0 & 0 & \dots & 0 \\
 0 & -1 & x & 0 & \dots & 0 \\
 \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \\
 0 & \dots & 0 & 0  & -1 & x
-\end{bmatrix}
+\end{vmatrix}
 $$
 
+(結論を先に書くと、$=-x^K + c_1 x^{K-1} + \dots + c_{K-1} x^1 + c_{K}$ )
 
 
 
