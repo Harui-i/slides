@@ -9,12 +9,24 @@ $K+1$項間の線型漸化式を持つ数列の$N$項目は行列累乗で求め
 
 ---
 
+## 対象とする人
+
+- 行列の積を知っている
+
+- 行列式の定義を知っている
+
+- 余因子展開(ラプラス展開)を知っていると嬉しいかも
+
+- 競技プログラミングの知識を別に問うわけではないけど、実装を理解するにはPythonの知識が必要かも
+
+---
+
 ## 考える問題
 
 $$a_{n+K}= c_1 a_{n+K-1} + c_2 a_{n+k-2} + \dots + c_{K-1} a_{n+1} + c_K a_n$$
 という$K+1$項間線形漸化式があるとする。
 
-$c_1, c_2, \dots , c_K$と、$a_1, a_1, \dots , a_K$ が与えられる。 $a_{N+1}$を求めよ。
+$c_1, c_2, \dots , c_K$と、$a_0, a_1, \dots , a_{K-1}$ が与えられる。 $a_{N}$を求めよ。
 
 制約
 - $1 \leq N \leq 10^{18}$
@@ -66,12 +78,12 @@ $$
 
 $$
 \begin{bmatrix}
-a_{N+K} \\
 a_{N+K-1} \\
-a_{N+K-2} \\ 
+a_{N+K-2} \\
+a_{N+K-3} \\ 
 \vdots \\
-a_{N+2} \\
-a_{N+1}
+a_{N+1} \\
+a_{N}
 \end{bmatrix}
 
 = 
@@ -85,16 +97,16 @@ c_1   & c_2 & c_3 & c_4 & \dots & c_K \\
 \end{bmatrix}^{N}
 
 \begin {bmatrix}
-a_K \\
 a_{K-1} \\
 a_{K-2} \\
+a_{K-3} \\
 \vdots \\
-a_{2} \\ 
-a_1  
+a_{1} \\ 
+a_0  
 \end {bmatrix}
 $$
 となる。
-数列の$N$項目は行列をだいたい$N$回掛けることで求められる。行列の積は1回あたり$O(K^3)$かかるので、$A^{N}$を求めるのに繰り返し二乗法を使うと、$a_{N+1}$は全体で$O(K^3 \log N)$ の計算量で求められる。
+数列の$N$項目は$A^N$を計算することで求められる。行列の積は1回あたり$O(K^3)$かかるので、$A^{N}$を求めるのに繰り返し二乗法を使うと、$a_{N}$は全体で$O(K^3 \log N)$ の計算量で求められる。
 
 ---
 
@@ -169,10 +181,10 @@ $x^N = q(x) \varphi_A(x) + r(x)$。ただし$\deg(r(x)) < \deg(\varphi_A(x))$
 ---
 
 ### 驚きの事実
-求めたい$a_{N+1}$は、$A^{N}$の一番下の行と、$[a_{K}, a_{K-1},   \dots , a_1 ]$の内積だった。
+求めたい$a_{N+1}$は、$A^{N}$の一番下の行と、$[a_{K-1}, a_{K-2},   \dots , a_0 ]$の内積だった。
 だから、$E, A^1, A^2, \dots A^{K-1}$の一番下の行のみわかればよい。
 
-ここで、驚きの事実(証明はあとで書く)として、$A^i$ ( $0 \leq i < K$) の一番下の行は、$K-i$列目だけ$1$で、他は$0$となっている。
+ここで、驚きの事実として、$A^i$ ( $0 \leq i < K$) の一番下の行は、$K-i$列目だけ$1$で、他は$0$となっている。
 
 なので、
 $$r_i A^i \begin{bmatrix} a_{K-1} \\ a_{K-2} \\ \vdots \\ a_1 \\ a_0 \end{bmatrix} =
@@ -186,10 +198,93 @@ $$r_i A^i \begin{bmatrix} a_{K-1} \\ a_{K-2} \\ \vdots \\ a_1 \\ a_0 \end{bmatri
 のようになる。($i$があるのは$K-i$列目)
 
 
+---
+### 驚きの事実の説明
+
+横ベクトル $\boldsymbol{p_1}, \boldsymbol{p_2}, \dots \boldsymbol{p_K}$を縦に並べた行列に左からAをかけることを考える。
+
+$$ 
+\begin{bmatrix}
+c_1   & c_2 & c_3 & c_4 & \dots & c_K \\
+1 & 0 & 0 & 0 & \dots & 0 \\
+0 & 1 & 0 & 0 & \dots & 0 \\
+0 & 0 & 1 & 0 & \dots & 0 \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \\
+0 & \dots & 0 & 0  & 1 & 0
+\end{bmatrix}
+
+
+\begin{bmatrix}
+\boldsymbol{p_1} \\
+\boldsymbol{p_2} \\
+\boldsymbol{p_3} \\
+\boldsymbol{p_4} \\
+\vdots \\
+\boldsymbol{p_{K}} \\
+\end{bmatrix}
+
+= 
+
+\begin{bmatrix}
+c_1\boldsymbol{p_1} + c_2 \boldsymbol{p_2} + \dots + c_K \boldsymbol{p_K} \\
+\boldsymbol{p_1} \\
+\boldsymbol{p_2} \\
+\boldsymbol{p_3} \\
+\vdots \\
+\boldsymbol{p_{K-1}} \\
+\end{bmatrix}
+
+$$
+
+このように、行列に対して$A$を左からかけると、行が一行下にずれて、一番上の行は行の線形結合になる。
+
+--- 
+
+ここで、
+
+> 驚きの事実 
+> $A^i$ ( $0 \leq i < K$) の一番下の行は、$K-i$列目だけ$1$で、他は$0$となっている。
+
+を拡張した、
+
+> 驚きの事実2
+> $A^i$ ($0 \leq i < K$)の$j$行目 ($i+1 \leq j \leq K$)は、$j-i$列目だけ$1$で、他は$0$となっている。
+
+を考える。 $A^0$や$A^1$について成立するのは明らか。
+
+$$ 
+A = 
+\begin{bmatrix}
+c_1   & c_2 & c_3 & c_4 & \dots & c_K \\
+1 & 0 & 0 & 0 & \dots & 0 \\
+0 & 1 & 0 & 0 & \dots & 0 \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \\
+0 & \dots & 0 & 0  & 1 & 0
+\end{bmatrix}
+$$
 
 ---
 
-よって、
+> 驚きの事実2
+> $A^i$ ($0 \leq i < K$)の$j$行目 ($i+1 \leq j \leq K$)は、$j-i$列目だけ$1$で、他は$0$となっている。
+
+帰納法で証明する。$i=0,1$で成立するのは明らか。$0$以上$K$未満のある整数$i$について驚きの事実2が成立すると仮定する。
+
+仮定から、$A^i$の $j$行目 ($i+1 \leq j \leq K$)は、$j-i$列目だけ$1$で、他は$0$。
+
+$A A^i = A^{i+1}$だから、$A^{i+1}$の$j$行目 ($2 \leq j \leq K$)は $A^i$の$j-1$行目に一致する。
+
+つまり、$(i+1) + 1 \leq j \leq K$ なる$j$について、$A^{i+1}$の$j$行目は$A^i$の$j-1$行目と同じく$j-1-i = j - (i+1)$列目だけ$1$で、他は$0$であるとわかる。
+
+これは、
+
+驚きの事実2が$i+1$でも成立していることに他ならない。
+
+帰納的に、$0 \leq i \lt K$についても驚きの事実2が成立する。(説明終わり)
+
+---
+
+驚きの事実などを使うと、
 $$ 
 r_0 E + r_1 A + \dots + r_{K-1} A^{K-1} = 
 \begin{bmatrix}
@@ -227,13 +322,13 @@ x - c_1  & -c_2 & -c_3 & -c_4 & \dots & -c_K \\
 \end{vmatrix}
 $$
 
-(結論を先に書くと、$=-x^K + c_1 x^{K-1} + \dots + c_{K-1} x^1 + c_{K}$ )
+(結論を先に書くと、$=x^K - c_1 x^{K-1} - \dots - c_{K-1} x^1 - c_{K}$ )
 
 ---
 
 ## ステップ2: $x^N$を $\varphi_A(x)$で割った余りを求める
 
-mod $\varphi_A(x)$ 上で$x^N$を計算すればよい。FFTなどをすると割り算に$O(K\log K)$かかりそれを$O(\log N)$回やるので $O(K \log K \log N)$ で求められる。
+mod $\varphi_A(x)$ 上で$x^N$を計算すればよい。FFTなどをすると割り算に$O(K\log K)$かかり、繰り返し二乗法で掛け算を$O(\log N)$回やるので $O(K \log K \log N)$ で求められる。
 
 
 ---
@@ -245,5 +340,6 @@ mod $\varphi_A(x)$ 上で$x^N$を計算すればよい。FFTなどをすると�
 ---
 
 ## 参考文献
+
 https://blog.miz-ar.info/2019/02/typical-dp-contest-t/ : 
 https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a : Bostan-MoriのMoriさんです
