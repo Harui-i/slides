@@ -1,7 +1,7 @@
 # このリポジトリは何？
 サークルの勉強会などで使ったスライドをおいています。
 
-# 線形漸化式を高速に解く！
+# 1. 線形漸化式を高速に解く！
 
 `https://github.com/Harui-i/slides/blob/main/linearly-recurrent-sequence.pdf`は、2024年の冬にサークルの勉強会で使用したスライドです。
 
