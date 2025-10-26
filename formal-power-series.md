@@ -165,6 +165,30 @@ $$ \frac{f}{1-x} = \sum_{i=0}^{\infty} \left( \sum_{j=0}^{i} a_j \right) x^i $$
 つまり、OGFにおいて、$\frac{1}{1-x}$をかける操作は、数列の累積和をとる操作に対応します。
 
 ---
+## OGFの積
+(あたりまえかも)
+
+$f = \sum_{i=0}^{\infty} a_i x^i, g = \sum_{i=0}^{\infty} b_i x^i$ のとき、
+
+$$fg = \sum_{i=0}^{\infty} \left( \sum_{j=0}^{i} a_j b_{i-j} \right) x^i $$
+
+
+---
+## OGFの積(続き)
+$f = \sum_{i=0}^{\infty} a_i x^i, g = \sum_{i=0}^{\infty} b_i x^i, h = \sum_{i=0}^{\infty} c_i x^i$ としたとき
+
+$$fgh = \sum_{i=0}^{\infty} x^i \sum_{i_1 + i_2 + i_3 = i}  a_{i_1} b_{i_2} c_{i_3}$$
+
+
+もっと一般に3個以上のOGFの積についても同様で、$x^i$の係数には、次数和が$i$であるような各項の選び型についての係数の積の総和が現れる。
+
+
+---
+## OGFの積の例(重複組み合わせ, 負の二項定理)
+
+TODO: kaku
+
+---
 ## EGFの積
 
 $f = \sum_{i=0}^{\infty} a_i \frac{x^i}{i!}, g = \sum_{i=0}^{\infty} b_i \frac{x^i}{i!}$ のとき、
@@ -172,6 +196,16 @@ $f = \sum_{i=0}^{\infty} a_i \frac{x^i}{i!}, g = \sum_{i=0}^{\infty} b_i \frac{x
 $$ fg = \sum_{i=0}^{\infty} \left( \sum_{j=0}^{i} \binom{i}{j} a_j b_{i-j} \right) \frac{x^i}{i!} $$
 
 つまり、 $(c_i)_{i=0}^{\infty}$の母関数が$fg$であるとき、$c_i = \sum_{j=0}^{i} \binom{i}{j} a_j b_{i-j}$ となる。
+
+
+---
+## EGFの積(続き)
+
+$f = \sum_{i=0}^{\infty} a_i \frac{x^i}{i!}$, $g = \sum_{i=0}^{\infty} b_i \frac{x^i}{i!}$, $h = \sum_{i=0}^{\infty} c_i \frac{x^i}{i!}$ としたとき
+
+$$fgh = \sum_{i=0}^{\infty} \frac{x^i}{i!} \sum_{i_1 + i_2 + i_3 = j} \frac{i!}{i_1! i_2! i_3!} a_{i_1} b_{i_2} c_{i_3}$$
+
+となる。3個以上のときも同様で、EGFの積の数列の$i$項目には、和が$i$となるような次数の選び方について、多項係数の重みつきの係数の積の総和が現れる。
 
 
 ---
@@ -185,7 +219,7 @@ $$1 + f + f^2 + f^3 + \ldots = \frac 1 {1-f}, \space f = \frac {x^3}{1-x}$$
 なので、「$x^3$に$1-x$の逆元をかけて、マイナス1倍してそれに1を足したものの逆元」を計算すれば求められる。
 (実は $\frac 1 {1-f} = \frac{1}{1 - \frac{x^3}{1-x}} = \frac {1-x}{1-x-x^3}$ なので、もっと簡単になる。母関数が有理関数なので線形漸化式があり、それを計算すればもっと単純になる)
 
----
+u
 ## 積の和典型
 > 長さが$N$、各要素が$1$以上$M$以下の整数列 $(a_1, a_2, \ldots, a_N)$ であって、和が$M$であるような全ての数列について$\prod_{i}{a_i}$を求めて、その総和求めよ。
 
