@@ -28,9 +28,9 @@ Harui (Twitter: @Nutoriaezu88808, GitHub: @Harui-i)
 ---
 # FPSとは？
 
-数列 $(a_i)_{i=0}^{\infty}$ に対して、$\sum_{i=0}^{\infty} a_i x^i$ と書くものを通常型母関数(Ordinary Generating Function, **OGF**)といいます。
+数列 $(a_n)_{n=0}^{\infty}$ に対して、$\sum_{n=0}^{\infty} a_n x^n$ と書くものを通常型母関数(Ordinary Generating Function, **OGF**)といいます。
 
-$\sum_{i=0}^{\infty} a_i \frac{x^i}{i!}$ と書くものを指数型母関数(Exponential Generating Function, **EGF**)といいます。
+$\sum_{n=0}^{\infty} a_n \frac{x^n}{n!}$ と書くものを指数型母関数(Exponential Generating Function, **EGF**)といいます。
 
 このように、数列に対応する冪級数を考えている、ということを意識することが重要な気がしています。
 
@@ -56,36 +56,38 @@ $\sum_{i=0}^{\infty} a_i \frac{x^i}{i!}$ と書くものを指数型母関数(Ex
 FPSの和/差/積/微分/積分は、通常の多項式と同じように定義されます。
 
 ## 和/差/積
-$f = \sum_{i=0}^{\infty} a_i x^i, g = \sum_{i=0}^{\infty} b_i x^i$ としたとき、
+$f = \sum_{n=0}^{\infty} a_n x^n, g = \sum_{n=0}^{\infty} b_n x^n$ としたとき、
 
-$$ f+g = \sum_{i=0}^{\infty} (a_i + b_i) x^i $$
+$$ f+g = \sum_{n=0}^{\infty} (a_n + b_n) x^n $$
 
-$$ fg = \sum_{i=0}^{\infty} \left( \sum_{j=0}^{i} a_j b_{i-j} \right) x^i $$
+$$ fg = \sum_{n=0}^{\infty} \left( \sum_{j=0}^{n} a_j b_{n-j} \right) x^n $$
 
 ---
 ## 微分
 
 極限を考えているわけではなく、こういう操作に微分という名前をつけているだけです。
 
-$$ f' = \sum_{i=1}^{\infty} i a_i x^{i-1} $$
+$$ f' = \sum_{n=1}^{\infty} n a_n x^{n-1} $$
 
 ---
 ## 逆元
 ここからはおそらく新しい演算に見えると思います。
 係数は $\mathbb{Q}$ や $\mathbb{F}_{998244353}$ のような体上であるとします。
 
-$f = \sum_{i=0}^{\infty} a_i x^i$ に対して、$g = \sum_{i=0}^{\infty} b_i x^i$ を $fg = 1$ (この右辺の $1$ は $(1, 0, 0, \ldots)$ に対応するFPS) を満たすような $g$を、$f$ の逆元と呼びます。
+$f = \sum_{n=0}^{\infty} a_n x^n$ に対して、$g = \sum_{n=0}^{\infty} b_n x^n$ を $fg = 1$ (この右辺の $1$ は $(1, 0, 0, \ldots)$ に対応するFPS) を満たすような $g$を、$f$ の逆元と呼びます。
 
 $f$の逆元は、$a_0 \neq 0$なら一意に存在して、そうでないと存在しません。(証明略)(逆元を手計算で計算する方法をしれば、この条件は納得できると思います)
 
 ---
 ### 逆元の計算方法・例
 
-$f = 1 - x$ の逆元 $g = \sum_{i=0}^{\infty} b_i x^i$ を求めます。
+$f = 1 - x$ の逆元 $g = \sum_{n=0}^{\infty} b_n x^n$ を求めます。
 
-$fg = 1$ と、 $fg = (1-x)g = g - xg = \sum_{i=0}^{\infty} b_i x^i - \sum_{i=0}^{\infty} b_i x^{i+1} = b_0 + \sum_{i=1}^{\infty} (b_i - b_{i-1}) x^i$ から、$b_0 = 1, \space b_i = b_{i-1} (i \geq 1)$
+$fg = 1$ と、 
+$fg = (1-x)g = g - xg = \sum_{n=0}^{\infty} b_n x^n - \sum_{n=0}^{\infty} b_n x^{n+1}$
+$= b_0 + \sum_{n=1}^{\infty} (b_n - b_{n-1}) x^n$ から、$b_0 = 1, \space b_n = b_{n-1} (n \geq 1)$
 
-がわかるので、$g = \sum_{i=0}^{\infty} 1 x^i = 1 + x + x^2 + x^3 + \ldots$ となります。
+がわかるので、$g = \sum_{n=0}^{\infty} 1 x^n = 1 + x + x^2 + x^3 + \ldots$ となります。
 
 つまり、
 
@@ -112,9 +114,9 @@ $1-x$の逆元が$1 + x + x^2 + \ldots$であるのは知っている思いま�
 ---
 ## exp
 
-$f = \sum_{i=0}^{\infty} a_i x^i$ (ただし、$a_0 = 0$)に対して、
+$f = \sum_{n=0}^{\infty} a_n x^n$ (ただし、$a_0 = 0$)に対して、
 
-$$ \exp(f) = \sum_{i=0}^{\infty} \frac{f^i}{i!} $$
+$$ \exp(f) = \sum_{n=0}^{\infty} \frac{f^n}{n!} $$
 とします。 $a_0 \neq 0$ の場合、$\exp(f)$の$0$次の項に$f$の係数の無限和が現れてしまいかなり「気ぃ悪い」ことになります。
 (たとえば、FPSの性質である和/差/積の$n$次目までの係数が、$n$次目までの係数だけで決まる、という性質が崩れます)
 
@@ -128,8 +130,8 @@ $$ \exp(f) = \sum_{i=0}^{\infty} \frac{f^i}{i!} $$
 
 ---
 ## log
-$f = \sum_{i=0}^{\infty} a_i x^i$ (ただし、$a_0 = 1$)に対して、
-$$ \log(f) = \sum_{i=1}^{\infty} (-1)^{i-1} \frac{(f-1)^i}{i} $$
+$f = \sum_{n=0}^{\infty} a_n x^n$ (ただし、$a_0 = 1$)に対して、
+$$ \log(f) = \sum_{n=1}^{\infty} (-1)^{n-1} \frac{(f-1)^n}{n} $$
 とします。 $a_0 \neq 1$ の場合、$\log(f)$の$0$次の項に$f$の係数の無限和が現れてしまいかなり「気ぃ悪い」ことになります。
 (たとえば、FPS性質である和/差/積の$n$次目までの係数が、$n$次目までの係数だけで決まる、という性質が崩れます)
 
@@ -142,25 +144,25 @@ TODO: 書く
 
 ---
 ## 微分の嬉しい性質(OGF)
-$f = \sum_{i=0}^{\infty} a_i x^i$ のとき、
+$f = \sum_{n=0}^{\infty} a_n x^n$ のとき、
 
-$$xf' = \sum_{i=0}^{\infty} i a_i x^i$$
+$$xf' = \sum_{n=0}^{\infty} n a_n x^n$$
 
 つまり、OGFにおいて、微分して$x$をかける操作は、数列の各項にそのインデックスをかける操作に対応します。
 
 
 ---
 ## 微分の嬉しい性質(EGF)
-$f = \sum_{i=0}^{\infty} a_i \frac{x^i}{i!}$ のとき、
-$$f' = \sum_{i=0}^{\infty} a_{i+1} \frac{x^i}{i!}$$
+$f = \sum_{n=0}^{\infty} a_n \frac{x^n}{n!}$ のとき、
+$$f' = \sum_{n=0}^{\infty} a_{n+1} \frac{x^n}{n!}$$
 つまり、EGFにおいて、微分する操作は、数列の各項を一つ前にずらす操作に対応します。
 
 
 ---
 ## 累積和(OGF)
 
-$f = \sum_{i=0}^{\infty} a_i x^i$ のとき、
-$$ \frac{f}{1-x} = \sum_{i=0}^{\infty} \left( \sum_{j=0}^{i} a_j \right) x^i $$
+$f = \sum_{n=0}^{\infty} a_n x^n$ のとき、
+$$ \frac{f}{1-x} = \sum_{n=0}^{\infty} \left( \sum_{m=0}^{n} a_m \right) x^n $$
 
 つまり、OGFにおいて、$\frac{1}{1-x}$をかける操作は、数列の累積和をとる操作に対応します。
 
@@ -168,44 +170,92 @@ $$ \frac{f}{1-x} = \sum_{i=0}^{\infty} \left( \sum_{j=0}^{i} a_j \right) x^i $$
 ## OGFの積
 (あたりまえかも)
 
-$f = \sum_{i=0}^{\infty} a_i x^i, g = \sum_{i=0}^{\infty} b_i x^i$ のとき、
+$f = \sum_{n=0}^{\infty} a_n x^n, g = \sum_{n=0}^{\infty} b_n x^n$ のとき、
 
-$$fg = \sum_{i=0}^{\infty} \left( \sum_{j=0}^{i} a_j b_{i-j} \right) x^i $$
+$$fg = \sum_{n=0}^{\infty} \left( \sum_{m=0}^{n} a_m b_{n-m} \right) x^n $$
 
 
 ---
 ## OGFの積(続き)
-$f = \sum_{i=0}^{\infty} a_i x^i, g = \sum_{i=0}^{\infty} b_i x^i, h = \sum_{i=0}^{\infty} c_i x^i$ としたとき
+$f = \sum_{n=0}^{\infty} a_n x^n, g = \sum_{n=0}^{\infty} b_n x^n, h = \sum_{n=0}^{\infty} c_n x^n$ としたとき
 
-$$fgh = \sum_{i=0}^{\infty} x^i \sum_{i_1 + i_2 + i_3 = i}  a_{i_1} b_{i_2} c_{i_3}$$
+$$fgh = \sum_{n=0}^{\infty} x^n \sum_{n_1 + n_2 + n_3 = n}  a_{n_1} b_{n_2} c_{n_3}$$
 
 
-もっと一般に3個以上のOGFの積についても同様で、$x^i$の係数には、次数和が$i$であるような各項の選び型についての係数の積の総和が現れる。
+もっと一般に3個以上のOGFの積についても同様で、$x^n$の係数には、次数和が$n$であるような各項の選び型についての係数の積の総和が現れる。
 
 
 ---
 ## OGFの積の例(重複組み合わせ, 負の二項定理)
 
-TODO: kaku
+数列 $(1, 1, 1, \ldots)$ に対応するOGFは
+$$\frac{1}{1-x} = 1 + x + x^2 + \cdots$$
+でした。これを$K$個掛け合わせると、
+$$\left(\frac{1}{1-x}\right)^K = (1 + x + x^2 + \cdots)^K = \sum_{n=0}^{\infty} \left(\sum_{n_1+\cdots+n_K = n} 1\right) x^n$$
+となり、$x^n$の係数は「$n$を$K$個の非負整数の和として書く方法の数(足す順番の区別あり)」すなわち重複組合せの数に一致します。
+($n$個の玉と$K-1$個の仕切りを並べる方法の数え上げ)
+
+---
+## OGFの積の例(重複組み合わせ, 負の二項定理 続き)
+$$\left(\frac{1}{1-x}\right)^K = \sum_{n=0}^{\infty} \binom{n+K-1}{K-1} x^n$$
+
+これを負の二項定理と呼んだりすることもあるらしいです。
+
+---
+## OGFの積の例(重複組み合わせ, 負の二項定理 まとめ)
+
+$$\sum_{n_1 + n_2 + \ldots + n_K = n} 1 = \binom{n+K-1}{K-1}$$
+
+これは、「$n$個の玉と$K-1$個の仕切りの並べかえの数」です。
+
+写像12相的に言うと **「$n$個の区別しない玉を$K$個の区別する箱に入れる場合の数(箱に入れる数は$0$でもいい)」** でもあります。
+
 
 ---
 ## EGFの積
 
-$f = \sum_{i=0}^{\infty} a_i \frac{x^i}{i!}, g = \sum_{i=0}^{\infty} b_i \frac{x^i}{i!}$ のとき、
+$f = \sum_{n=0}^{\infty} a_n \frac{x^n}{n!}, g = \sum_{n=0}^{\infty} b_n \frac{x^n}{n!}$ のとき、
 
-$$ fg = \sum_{i=0}^{\infty} \left( \sum_{j=0}^{i} \binom{i}{j} a_j b_{i-j} \right) \frac{x^i}{i!} $$
+$$ fg = \sum_{n=0}^{\infty} \left( \sum_{j=0}^{n} \binom{n}{j} a_j b_{n-j} \right) \frac{x^n}{n!} $$
 
-つまり、 $(c_i)_{i=0}^{\infty}$の母関数が$fg$であるとき、$c_i = \sum_{j=0}^{i} \binom{i}{j} a_j b_{i-j}$ となる。
-
+つまり、 $(c_n)_{n=0}^{\infty}$の母関数が$fg$であるとき、$c_n = \sum_{j=0}^{n} \binom{n}{j} a_j b_{n-j}$ となります。 OGFの場合との違いは、係数の積に二項係数の重みがついていることです。
 
 ---
 ## EGFの積(続き)
 
-$f = \sum_{i=0}^{\infty} a_i \frac{x^i}{i!}$, $g = \sum_{i=0}^{\infty} b_i \frac{x^i}{i!}$, $h = \sum_{i=0}^{\infty} c_i \frac{x^i}{i!}$ としたとき
+$f = \sum_{n=0}^{\infty} a_n \frac{x^n}{n!}$, $g = \sum_{n=0}^{\infty} b_n \frac{x^n}{n!}$, $h = \sum_{n=0}^{\infty} c_n \frac{x^n}{n!}$ としたとき
 
-$$fgh = \sum_{i=0}^{\infty} \frac{x^i}{i!} \sum_{i_1 + i_2 + i_3 = j} \frac{i!}{i_1! i_2! i_3!} a_{i_1} b_{i_2} c_{i_3}$$
+$$fgh = \sum_{n=0}^{\infty} \frac{x^n}{n!} \sum_{n_1 + n_2 + n_3 = n} \frac{n!}{n_1! n_2! n_3!} a_{n_1} b_{n_2} c_{n_3}$$
 
-となる。3個以上のときも同様で、EGFの積の数列の$i$項目には、和が$i$となるような次数の選び方について、多項係数の重みつきの係数の積の総和が現れる。
+となります。4個以上のときも同様で、EGFの積の数列の$n$項目には、和が$n$となるような次数の選び方について、係数の積に多項係数で重み付けしたものの総和が現れます。
+
+---
+### EGFの積の例(指数関数の冪)
+数列 $(1, 1, 1, \ldots)$ に対応するEGFは $e^x$ です。これを$K$個掛け合わせると
+$$ (e^x)^K = e^{Kx} = \sum_{n=0}^{\infty} \frac{(Kx)^n}{n!} = \sum_{n=0}^{\infty} K^n \frac{x^n}{n!} $$
+となります。EGFの積を考えると、以下のように捉えることもできます。
+$$K^n\frac{x^n}{n!} = \frac{x^n}{n!} \sum_{n_1 + n_2 + \ldots + n_K = n} \frac{n!}{n_1! n_2! \ldots n_K!} a_{n_1} b_{n_2} \ldots c_{n_K}$$
+
+つまり、
+
+$$\sum_{n_1 + n_2 + \ldots + n_K = n} \frac{n!}{n_1! n_2! \ldots n_K!} = K^n$$
+
+です。これは、$n$個の区別する玉を$K$個の区別する箱に入れる場合の数です。
+
+
+---
+### OGFの積の場合
+
+$$\sum_{n_1 + n_2 + \ldots + n_K = n} 1 = \binom{n+K-1}{K-1}$$
+
+- これは、$n$個の**区別しない玉**を$K$個の区別する箱に入れる場合の数
+
+### EGFの積の例(指数関数の冪 まとめ)
+$$\sum_{n_1 + n_2 + \ldots + n_K = n} \frac{n!}{n_1! n_2! \ldots n_K!} = K^n$$
+
+- これは、$n$個の**区別する玉**を$K$個の区別する箱に入れる場合の数
+
+このように、区別する/しないの違いがOGF/EGFの違いと対応することもあります(他の例もあるかも)
 
 
 ---
@@ -231,9 +281,9 @@ $f = x + 2x^2 + 3x^3 + \ldots$ とすると、求める和は $f^N$ の $x^M$ �
 ## 積の和典型(続き)
 > 長さが$N$、各要素が$1$以上$M$以下の整数列 $(a_1, a_2, \ldots, a_N)$ であって、和が$M$であるような全ての数列について$\prod_{i}{a_i}$を求めて、その総和求めよ。
 
-$f^N = (x(\frac{1}{1-x})')^N = (x(1-x)^{-2})^N = (\frac{x}{(1-x)^2})^N$ であり、 実は $(1-x)^{-K} = \sum_{i=0}^{\infty} \binom{i+K-1}{K-1} x^i$ なので、二項係数さえもとまっていれば、$f^N$の$M$次の係数は$\Theta(1)$ で計算できる。 
+$f^N = (x(\frac{1}{1-x})')^N = (x(1-x)^{-2})^N = (\frac{x}{(1-x)^2})^N$ であり、 実は $(1-x)^{-K} = \sum_{n=0}^{\infty} \binom{n+K-1}{K-1} x^n$ なので、二項係数さえもとまっていれば、$f^N$の$M$次の係数は$\Theta(1)$ で計算できる。 
 
-$(1-x)^{-K}$の$i$次の係数が二項係数で表せる理由: 区別する$K$個の箱に、区別しない$i$個の玉を入れる方法の数え上げ(玉と仕切りを考えるやつ)なので、$K$個の玉と$i-1$個の仕切りを並べる方法の数え上げに対応するから。
+$(1-x)^{-K}$の$n$次の係数が二項係数で表せる理由: 区別する$K$個の箱に、区別しない$n$個の玉を入れる方法の数え上げ(玉と仕切りを考えるやつ)なので、$K$個の玉と$n-1$個の仕切りを並べる方法の数え上げに対応するから。
 
 
 
