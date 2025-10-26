@@ -193,7 +193,7 @@ $$\frac{1}{1-x} = 1 + x + x^2 + \cdots$$
 でした。これを$K$個掛け合わせると、
 $$\left(\frac{1}{1-x}\right)^K = (1 + x + x^2 + \cdots)^K = \sum_{n=0}^{\infty} \left(\sum_{n_1+\cdots+n_K = n} 1\right) x^n$$
 となり、$x^n$の係数は「$n$を$K$個の非負整数の和として書く方法の数(足す順番の区別あり)」すなわち重複組合せの数に一致します。
-($n$個の玉と$K-1$個の仕切りを並べる方法の数え上げ)
+($n$個の玉と$K-1$個の仕切りを並べる方法の数え上げなので)
 
 ---
 ## OGFの積の例(重複組み合わせ, 負の二項定理 続き)
@@ -234,7 +234,7 @@ $$fgh = \sum_{n=0}^{\infty} \frac{x^n}{n!} \sum_{n_1 + n_2 + n_3 = n} \frac{n!}{
 数列 $(1, 1, 1, \ldots)$ に対応するEGFは $e^x$ です。これを$K$個掛け合わせると
 $$ (e^x)^K = e^{Kx} = \sum_{n=0}^{\infty} \frac{(Kx)^n}{n!} = \sum_{n=0}^{\infty} K^n \frac{x^n}{n!} $$
 となります。EGFの積を考えると、以下のように捉えることもできます。
-$$K^n\frac{x^n}{n!} = \frac{x^n}{n!} \sum_{n_1 + n_2 + \ldots + n_K = n} \frac{n!}{n_1! n_2! \ldots n_K!} a_{n_1} b_{n_2} \ldots c_{n_K}$$
+$$K^n\frac{x^n}{n!} = \frac{x^n}{n!} \sum_{n_1 + n_2 + \ldots + n_K = n} \frac{n!}{n_1! n_2! \ldots n_K!} 1^K$$
 
 つまり、
 
